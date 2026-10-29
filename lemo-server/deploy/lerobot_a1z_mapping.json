@@ -1,0 +1,21 @@
+{
+  "_comment": "板端 wire 键名 ↔ lerobot 策略特征键名映射。默认与 mcap2lerobot 转出的数据集键名一致(身份映射)。若训练时改了特征名,只改本文件。state_concat_key 非空时状态按 state_parts 顺序拼接成平铺向量(DP/ACT 需要);若策略按部件键分别输入则置 null。action_layout 顺序 = 模型输出平铺向量的切分顺序,必须与训练时 output_features 拼接顺序一致。",
+  "images": {
+    "head_rgb": "observation.images.head_rgb",
+    "left_wrist_rgb": "observation.images.left_wrist_rgb",
+    "right_wrist_rgb": "observation.images.right_wrist_rgb"
+  },
+  "state_parts": [
+    {"wire": "left_arm", "policy": "observation.state.left_arm", "dim": 6},
+    {"wire": "left_gripper", "policy": "observation.state.left_gripper", "dim": 1},
+    {"wire": "right_arm", "policy": "observation.state.right_arm", "dim": 6},
+    {"wire": "right_gripper", "policy": "observation.state.right_gripper", "dim": 1}
+  ],
+  "state_concat_key": "observation.state",
+  "action_layout": [
+    ["left_arm", 6],
+    ["left_gripper", 1],
+    ["right_arm", 6],
+    ["right_gripper", 1]
+  ]
+}
